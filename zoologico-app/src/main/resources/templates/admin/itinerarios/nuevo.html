@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Itinerario - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Agregar Nuevo Itinerario</h1>
+
+    <form th:action="@{/admin/itinerarios/nuevo}" th:object="${itinerario}" method="post">
+        <label>Codigo:</label>
+        <input type="text" th:field="*{codigo}" required><br>
+
+        <label>Duracion del Recorrido (min):</label>
+        <input type="text" th:field="*{duracionRecorrido}" required><br>
+
+        <label>Longitud (km):</label>
+        <input type="text" th:field="*{longitud}" required><br>
+
+        <label>Maximos Vicitantes:</label>
+        <input type="text" th:field="*{maxVisitantes}" required><br>
+
+        <label>Zonas:</label>
+        <div th:each="zona : ${zonas}">
+            <input type="checkbox" name="zonaIds" th:value="${zona.id}" th:id="${'zona' + zona.id}">
+            <label th:for="${'zona' + zona.id}" th:text="${zona.nombre}"></label>
+        </div>
+        <br>
+
+        <label>Guias:</label>
+        <div th:each="guia : ${guias}">
+            <input type="checkbox" name="guiaIds" th:value="${guia.id}" th:id="${'guia' + guia.id}">
+            <label th:for="${'guia' + guia.id}" th:text="${guia.nombre}"></label>
+        </div>
+        <br>
+
+        <button type="submit">Guardar</button>
+        <a th:href="@{/admin/itinerarios}">Cancelar</a>
+    </form>
+</body>
+</html>

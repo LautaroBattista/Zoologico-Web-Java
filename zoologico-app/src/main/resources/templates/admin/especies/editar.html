@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Especie - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Editar Especie</h1>
+
+    <form th:action="@{/admin/especies/editar/{id}(id=${especie.id})}"
+          th:object="${especie}" method="post">
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required><br>
+
+        <label>Nombre Cientifico:</label>
+        <input type="text" th:field="*{nombreCientifico}" required><br>
+
+        <label>Descripcion:</label>
+        <input type="text" th:field="*{descripcion}" required><br>
+
+        <label>Zona:</label>
+        <select name="zonaId" required>
+            <option value="">Seleccionar zona</option>
+            <option th:each="zona : ${zonas}"
+                    th:value="${zona.id}"
+                    th:text="${zona.nombre}"
+                    th:selected="${especie.zona != null && especie.zona.id == zona.id}">
+            </option>
+        </select><br>
+
+        <label>Habitat:</label>
+        <div th:each="habitat : ${habitats}">
+            <input type="checkbox" name="habitatIds" th:value="${habitat.id} "th:id="${'habitat' + habitat.id} "th:checked="${especie.habitats.contains(habitat)}">
+            <label th:for="${'habitat' + habitat.id}" th:text="${habitat.nombre}"></label>
+        </div>
+        <br>
+
+        <label>Cuidadores:</label>
+        <div th:each="cuidador : ${cuidadores}">
+            <input type="checkbox" name="cuidadorIds" th:value="${cuidador.id}" th:id="${'cuidador' + cuidador.id}"
+                th:checked="${cuidadorIdsAsignados.contains(cuidador.id)}">
+            <label th:for="${'cuidador' + cuidador.id}" th:text="${cuidador.nombre}"></label>
+        </div>
+        <br>
+
+        <button type="submit">Actualizar</button>
+        <a th:href="@{/admin/especies}">Cancelar</a>
+    </form>
+</body>
+</html>

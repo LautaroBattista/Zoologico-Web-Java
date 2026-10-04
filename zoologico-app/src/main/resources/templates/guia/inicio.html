@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Guia - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Panel Guia</h1>
+    <h2>Bienvenido</h2>
+
+    <nav>
+        <ul>
+            <li><a th:href="@{/guia/itinerarios}">Ver mis Itinerarios</a></li>
+        </ul>
+    </nav>
+
+    <form th:action="@{/logout}" method="post">
+        <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"> -->
+        <button type="submit">Cerrar Sesion</button>
+    </form>
+</body>
+</html>

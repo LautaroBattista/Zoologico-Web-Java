@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Cuidador - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Editar Cuidador</h1>
+
+    <form th:action="@{/admin/cuidadores/editar/{id}(id=${cuidador.id})}"
+          th:object="${cuidador}" method="post">
+        <label>Usuario:</label>
+        <input type="text" th:field="*{usuario}" required><br>
+
+        <label>Nueva Contraseña (dejar vacío para no cambiar):</label>
+        <input type="password" name="passwordNueva"><br>
+
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required><br>
+
+        <label>Direccion:</label>
+        <input type="text" th:field="*{direccion}" required><br>
+
+        <label>Telefono:</label>
+        <input type="text" th:field="*{telefono}" required><br>
+
+        <label>Fecha de ingreso al parque:</label>
+        <input type="text" th:field="*{fechaDeIngresoEnElParque}" required><br>
+
+        <button type="submit">Actualizar</button>
+        <a th:href="@{/admin/personas}">Cancelar</a>
+    </form>
+</body>
+</html>

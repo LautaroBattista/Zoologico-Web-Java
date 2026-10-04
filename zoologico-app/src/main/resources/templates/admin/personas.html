@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Personas - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Personas del Sistema</h1>
+
+    <a th:href="@{/admin/inicio}">Volver al inicio</a>
+    <a th:href="@{/admin/guias/nuevo}">Agregar Guia</a>
+    <a th:href="@{/admin/cuidadores/nuevo}">Agregar Cuidador</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Tipo</th>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="persona : ${personas}">
+                <td th:text="${persona.class.simpleName}"></td>
+                <td th:text="${persona.usuario}"></td>
+                <td th:text="${persona instanceof T(zoologico.zoologico.model.Empleado) ? persona.nombre : 'Admin'}"></td>
+                <td th:text="${persona instanceof T(zoologico.zoologico.model.Empleado) ? persona.direccion : '-'}"></td>
+                <td th:text="${persona instanceof T(zoologico.zoologico.model.Empleado) ? persona.telefono : '-'}"></td>
+                <td>
+                    <span th:if="${persona instanceof T(zoologico.zoologico.model.Cuidador)}"
+                          th:text="${persona.fechaDeIngresoEnElParque}"></span>
+                    <span th:if="${persona instanceof T(zoologico.zoologico.model.Guia)}"
+                          th:text="${persona.fechaDeInicioDeTrabajoAlZoo}"></span>
+                    <span th:unless="${persona instanceof T(zoologico.zoologico.model.Empleado)}">-</span>
+                </td>
+                <td>
+                    <div th:if="${persona instanceof T(zoologico.zoologico.model.Guia)}">
+                        <a th:href="@{/admin/guias/editar/{id}(id=${persona.id})}">Editar</a>
+                        <form th:action="@{/admin/guias/eliminar/{id}(id=${persona.id})}" method="post">
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </div>
+                    <div th:if="${persona instanceof T(zoologico.zoologico.model.Cuidador)}">
+                        <a th:href="@{/admin/cuidadores/editar/{id}(id=${persona.id})}">Editar</a>
+                        <form th:action="@{/admin/cuidadores/eliminar/{id}(id=${persona.id})}" method="post">
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${error}" style="color:red">
+        <p th:text="${error}"></p>
+    </div>    
+</body>
+</html>

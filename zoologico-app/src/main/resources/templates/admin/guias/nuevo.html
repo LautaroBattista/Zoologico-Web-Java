@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Guia - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Agregar Nuevo Guia</h1>
+
+    <form th:action="@{/admin/guias/nuevo}" th:object="${guia}" method="post">
+        <label>Usuario:</label>
+        <input type="text" th:field="*{usuario}" required><br>
+
+        <label>Contraseña:</label>
+        <input type="password" th:field="*{password}" required><br>
+
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required><br>
+
+        <label>Direccion:</label>
+        <input type="text" th:field="*{direccion}" required><br>
+
+        <label>Telefono:</label>
+        <input type="text" th:field="*{telefono}" required><br>
+
+        <label>Fecha de inicio de trabajo:</label>
+        <input type="text" th:field="*{fechaDeInicioDeTrabajoAlZoo}" required><br>
+
+        <button type="submit">Guardar</button>
+        <a th:href="@{/admin/personas}">Cancelar</a>
+    </form>
+</body>
+</html>

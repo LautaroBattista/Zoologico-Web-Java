@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Administrador - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Panel Administrador</h1>
+    <h2>Bienvenido</h2>
+
+    <nav>
+        <ul>
+            <li><a th:href="@{/admin/personas}">Ver Personas</a></li>
+            <li><a th:href="@{/admin/especies}">Ver Especies</a></li>
+            <li><a th:href="@{/admin/habitats}">Ver Habitats</a></li>
+            <li><a th:href="@{/admin/zonas}">Ver Zonas</a></li>
+            <li><a th:href="@{/admin/itinerarios}">Ver Itinerarios</a></li>
+        </ul>
+    </nav>
+
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Cerrar Sesion</button>
+    </form>
+</body>
+</html>
+
+<!--
+<table>
+  <thead>
+    <tr>  ← fila de encabezado
+      <th>Nombre</th>  <th>Zona</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>  ← fila de datos
+      <td>Leon</td>  <td>Africana</td>
+    </tr>
+  </tbody>
+</table>
+-->

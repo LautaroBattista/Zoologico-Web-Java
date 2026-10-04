@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Zonas - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Zonas del Zoologico</h1>
+
+    <a th:href="@{/admin/inicio}">Volver al inicio</a>
+    <a th:href="@{/admin/zonas/nueva}">Agregar Zona</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Extencion</th>
+                <th>Cantidad De Especies</th>
+                <th>Cantidad De Itinerarios</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="zona : ${zonas}">
+                <td th:text="${zona.nombre}"></td>
+                <td th:text="${zona.extension}"></td>
+                <td th:text="${zona.especies.size()}"></td>
+                <td th:text="${zona.itinerarios.size()}"></td>
+                <td>
+                    <a th:href="@{/admin/zonas/editar/{id}(id=${zona.id})}">Editar</a>
+                    <form th:action="@{/admin/zonas/eliminar/{id}(id=${zona.id})}" method="post">
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div th:if="${error}" style="color:red">
+        <p th:text="${error}"></p>
+    </div>
+</body>
+</html>

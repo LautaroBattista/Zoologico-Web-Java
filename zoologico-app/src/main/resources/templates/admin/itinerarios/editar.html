@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Itinerario - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Editar Itinerario</h1>
+
+    <form th:action="@{/admin/itinerarios/editar/{id}(id=${itinerario.id})}"
+          th:object="${itinerario}" method="post">
+        <label>Codigo:</label>
+        <input type="number" th:field="*{codigo}" required><br>
+
+        <label>Duracion del Recorrido (min):</label>
+        <input type="number" th:field="*{duracionRecorrido}" required><br>
+
+        <label>Longitud (km):</label>
+        <input type="number" th:field="*{longitud}" step="0.01" required><br>
+
+        <label>Maximo de Visitantes:</label>
+        <input type="number" th:field="*{maxVisitantes}" required><br>
+
+        <label>Zonas:</label>
+        <div th:each="zona : ${zonas}">
+            <input type="checkbox" name="zonaIds" th:value="${zona.id}" th:id="${'zona' + zona.id}"
+                th:checked="${itinerario.zonas.contains(zona)}">
+            <label th:for="${'zona' + zona.id}" th:text="${zona.nombre}"></label>
+        </div>
+        <br>
+
+        <label>Guias:</label>
+        <div th:each="guia : ${guias}">
+            <input type="checkbox" name="guiaIds" th:value="${guia.id}" th:id="${'guia' + guia.id}"
+                th:checked="${guiaIdsAsignados.contains(guia.id)}">
+            <label th:for="${'guia' + guia.id}" th:text="${guia.nombre}"></label>
+        </div>
+        <br>
+
+        <button type="submit">Actualizar</button>
+        <a th:href="@{/admin/itinerarios}">Cancelar</a>
+    </form>
+</body>
+</html>

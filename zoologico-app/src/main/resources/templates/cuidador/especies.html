@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Especies - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Mis Especies</h1>
+
+    <a th:href="@{/cuidador/inicio}">Volver al inicio</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>NombreCientifico</th>
+                <th>Descripcion</th>
+                <th>Zona</th>
+                <th>Fecha de Ingreso</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="cuidado : ${cuidados}">
+                <td th:text="${cuidado.especie.nombre}"></td>
+                <td th:text="${cuidado.especie.nombreCientifico}"></td>
+                <td th:text="${cuidado.especie.descripcion}"></td>
+                <td th:text="${cuidado.especie.zona != null ? cuidado.especie.zona.nombre : 'Sin zona'}"></td>
+                <td th:text="${cuidado.fechaIngreso}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

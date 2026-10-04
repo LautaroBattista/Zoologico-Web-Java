@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Itinerarios - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Itinerarios del Zoologico</h1>
+
+    <a th:href="@{/admin/inicio}">Volver al inicio</a>
+    <a th:href="@{/admin/itinerarios/nuevo}">Agregar itinerario</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Duracion (min)</th>
+                <th>Longitud (km)</th>
+                <th>Max Visitantes</th>
+                <th>Cant Especies</th>
+                <th>Zonas</th>
+                <th>Guias</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="itinerario : ${itinerarios}">
+                <td th:text="${itinerario.codigo}"></td>
+                <td th:text="${itinerario.duracionRecorrido}"></td>
+                <td th:text="${itinerario.longitud}"></td>
+                <td th:text="${itinerario.maxVisitantes}"></td>
+                <td th:text="${itinerario.cantEspecies}"></td>
+                <td>
+                    <span th:each="zona, iter : ${itinerario.zonas}">
+                        <span th:text="${zona.nombre}"></span>
+                        <span th:if="${!iter.last}">, </span>
+                    </span>
+                </td>
+                <td>
+                    <span th:each="asig, iter : ${itinerario.asignaciones}">
+                        <span th:text="${asig.guia.nombre} + ' (' + ${asig.hora} + ')'"></span>
+                        <span th:if="${!iter.last}">, </span>
+                    </span>
+                </td>
+                <td>
+                    <a th:href="@{/admin/itinerarios/editar/{id}(id=${itinerario.id})}">Editar</a>
+                    <form th:action="@{/admin/itinerarios/eliminar/{id}(id=${itinerario.id})}" method="post">
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Zona - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Editar Zona</h1>
+
+    <form th:action="@{/admin/zonas/editar/{id}(id=${zona.id})}" 
+          th:object="${zona}" method="post">
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required><br>
+
+        <label>Extension (metros):</label>
+        <input type="number" th:field="*{extension}" step="0.01" required><br>
+
+        <button type="submit">Actualizar</button>
+        <a th:href="@{/admin/zonas}">Cancelar</a>
+    </form>
+</body>
+</html>

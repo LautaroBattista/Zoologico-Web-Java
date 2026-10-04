@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Habitat - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Agregar Nuevo Habitat</h1>
+
+    <form th:action="@{/admin/habitats/nuevo}" th:object="${habitat}" method="post">
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required><br>
+
+        <label>Clima:</label>
+        <input type="text" th:field="*{clima}" required><br>
+
+        <label>Vegetacion:</label>
+        <input type="text" th:field="*{vegetacion}" required><br>
+
+        <label>Continentes:</label><br>
+        <div th:each="continente : ${continentes}">
+            <input type="checkbox" name="continentes" th:value="${continente}" th:id="${continente}">
+            <label th:for="${continente}" th:text="${continente}"></label>
+        </div>
+        <br>
+
+        <button type="submit">Guardar</button>
+        <a th:href="@{/admin/habitats}">Cancelar</a>
+    </form>
+</body>
+</html>

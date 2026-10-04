@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Especies - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Especies del Zoologico</h1>
+
+    <a th:href="@{/admin/inicio}">Volver al inicio</a>
+    <a th:href="@{/admin/especies/nueva}">Agregar Especie</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Nombre Cientifico</th>
+                <th>Descripcion</th>
+                <th>Zona</th>
+                <th>Habitat</th>
+                <th>Cuidadores</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="especie : ${especies}">
+                <td th:text="${especie.nombre}"></td>
+                <td th:text="${especie.nombreCientifico}"></td>
+                <td th:text="${especie.descripcion}"></td>
+                <td th:text="${especie.zona != null ? especie.zona.nombre : 'Sin zona'}"></td>
+                <td>
+                    <span th:each="habitat, iter : ${especie.habitats}">
+                        <span th:text="${habitat.nombre}"></span>
+                        <span th:if="${!iter.last}">, </span>
+                    </span>
+                </td>
+                <td>
+                    <span th:each="cuidado, iter : ${especie.cuidados}">
+                        <span th:text="${cuidado.cuidador.nombre}"></span>
+                        <span th:if="${!iter.last}">, </span>
+                    </span>
+                </td>
+                <td>
+                    <a th:href="@{/admin/especies/editar/{id}(id=${especie.id})}">Editar</a>
+                    <form th:action="@{/admin/especies/eliminar/{id}(id=${especie.id})}" method="post">
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

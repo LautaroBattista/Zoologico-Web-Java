@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Itinerarios - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Mis Itinerarios</h1>
+
+    <a th:href="@{/guia/inicio}">Volver al inicio</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Duracion (min)</th>
+                <th>Longitud (km)</th>
+                <th>Max Visitantes</th>
+                <th>Cant Especies</th>
+                <th>Zonas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="itinerario : ${itinerarios}">
+                <td th:text="${itinerario.codigo}"></td>
+                <td th:text="${itinerario.duracionRecorrido}"></td>
+                <td th:text="${itinerario.longitud}"></td>
+                <td th:text="${itinerario.maxVisitantes}"></td>
+                <td th:text="${itinerario.cantEspecies}"></td>
+                <td>
+                    <span th:each="zona, iter : ${itinerario.zonas}">
+                        <span th:text="${zona.nombre}"></span>
+                        <span th:if="${!iter.last}">, </span>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

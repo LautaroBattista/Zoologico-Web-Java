@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Configuracion Inicial - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Configuracion Inicial del Sistema</h1>
+    <p>Bienvenido. Para comenzar, cree el usuario administrador.</p>
+
+    <form th:action="@{/setup}" method="post">
+        <label>Usuario:</label>
+        <input type="text" name="usuario" required><br>
+
+        <label>Contraseña:</label>
+        <input type="password" name="password" required><br>
+
+        <button type="submit">Crear Administrador</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Zoologico Temaiken</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Sistema de Gestion - Temaiken</h1>
+    <h2>Iniciar Sesion</h2>
+
+    <!-- Mensaje de error si el login fallo -->
+    <div th:if="${param.error}">
+        <p>Usuario o contraseña incorrectos.</p>
+    </div>
+
+    <!-- Mensaje si cerro sesion -->
+    <div th:if="${param.logout}">
+        <p>Sesion cerrada correctamente.</p>
+    </div>
+
+    <!-- Formulario de login -->
+    <form th:action="@{/login}" method="post">
+        <label>Usuario:</label>
+        <input type="text" name="username" required><br>
+
+        <label>Contraseña:</label>
+        <input type="password" name="password" required><br>
+
+        <button type="submit">Ingresar</button>
+    </form>
+</body>
+</html>
